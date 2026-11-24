@@ -12,6 +12,8 @@ writeFileSync(path, input.replace("${i18n._(title)} - Documenso` : 'Documenso'",
 NODE
 npx --no-install turbo run build --filter=@documenso/remix --env-mode=loose
 cd apps/remix/build/server
+mkdir -p hono/packages/lib/translations
+cp -R ../../../../packages/lib/translations/. hono/packages/lib/translations/
 mv index.js manifest.js
 cat > index.js <<'ENTRY'
 import handle from 'hono-react-router-adapter/node';
@@ -23,3 +25,8 @@ export * from './manifest.js';
 const app = handle(manifest, server, { getLoadContext });
 export default (request) => app.fetch(request);
 ENTRY
+for catalog in hono/packages/lib/translations/*/web.mjs; do
+  test -f "$catalog"
+  printf '\nimport "./%s";\n' "$catalog" >> index.js
+done
+node --input-type=module -e "await import('./index.js'); process.exit(0)"
