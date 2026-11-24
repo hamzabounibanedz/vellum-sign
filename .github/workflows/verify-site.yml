@@ -1,0 +1,21 @@
+name: Verify portfolio site
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Verify the application
+        run: |
+          npm install -g npm@11.19.1
+          npm ci
+          cp .env.example .env
+          npm run build
