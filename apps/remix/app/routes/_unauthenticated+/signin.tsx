@@ -129,7 +129,7 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
         </h1>
 
         <p className="mt-2 text-muted-foreground text-sm">
-          <Trans>Welcome back, we are lucky to have you.</Trans>
+          <Trans>Welcome back to Vellum Sign.</Trans>
         </p>
         <hr className="-mx-6 my-4" />
 
@@ -156,6 +156,7 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
           </p>
         )}
       </div>
+      <p className="mt-4 text-center text-sm text-muted-foreground">Vellum Sign is built on Documenso. <a className="underline" href="https://github.com/hamzabounibanedz/vellum-sign">Source code</a></p>
     </div>
   );
 }
