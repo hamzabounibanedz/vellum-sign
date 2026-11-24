@@ -10,7 +10,7 @@ const path = 'apps/remix/app/utils/meta.ts';
 const input = readFileSync(path, 'utf8');
 writeFileSync(path, input.replace("${i18n._(title)} - Documenso` : 'Documenso'", "${i18n._(title)} - Vellum Sign` : 'Vellum Sign'").replace(/Join Documenso,.*?community\./, 'Prepare documents, collect signatures, and track agreement status in Vellum Sign.').replace('Documenso - The Open Source DocuSign Alternative', 'Vellum Sign — Document signing'));
 NODE
-npx --no-install turbo run build --filter=@documenso/remix --env-mode=loose
+npx --no-install turbo run build --filter=@documenso/remix --env-mode=loose --force
 cd apps/remix/build/server
 mkdir -p hono/packages/lib/translations
 cp -R ../../../../packages/lib/translations/. hono/packages/lib/translations/
